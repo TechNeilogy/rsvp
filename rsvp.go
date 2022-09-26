@@ -66,6 +66,11 @@ func reservoirSampler(
 		}
 		samples[i] = scanner.Text()
 	}
+
+	if i <= 0 {
+		return make([]string, 0), nil
+	}
+
 	k = i
 	linesTotal := k
 
