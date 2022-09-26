@@ -1,0 +1,46 @@
+.TH RSVP "1" "September 2022" "Health Catalyst" "User Commands"
+.SH NAME
+rsvp \- reservoir sampling from stdin
+.SH SYNOPSIS
+\fI\,stdin\fR\, |\fR
+.B rsvp
+[\fI\,OPTION\/\fR]...
+.SH DESCRIPTION
+.\" Add any additional description here
+.PP
+Select random entries from stdin using a reservoir sampling algorithm
+.TP
+\fB\-h\fR
+print help text and exit
+.TP
+\fB\-k\fR
+number of samples to return;
+.IP
+If this number is larger than the number of lines from stdin, the program will return a number of samples equal to the number of lines.  Defaults to 3.  (Values less than 0 revert to 0.)
+.TP
+\fB\-ml\fR
+maximum number of lines to process, not including the number of lines skipped by sk
+.IP
+The program will stop and return a sample after processing this many lines, regardless of the value of k or the number of lines in stdin.  Facilitates sampling from very large or infinite streams.  Defaults to unlimited.  (Values less than 0 revert to unlimited.)
+.TP
+\fB\-s\fR
+silent mode; if the program exits in error, no error message will be printed to stderr
+.TP
+\fB\-sk\fR
+initial number of lines to skip
+.IP
+This many lines will be skipped regardless of the values of k or ml.  Defaults to none.  (Values less than 0 revert to none.)
+.TP
+\fB\-v\fR
+print the version and exit
+.SS "Exit status:"
+.TP
+0
+if OK,
+.TP
+1
+on any error.
+.SH AUTHOR
+Written by Neil P. Carrier.
+.SH COPYRIGHT
+Copyright \(co 2022 Health Catalyst, Inc.
