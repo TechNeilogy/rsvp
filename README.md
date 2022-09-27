@@ -37,13 +37,16 @@ https://en.wikipedia.org/wiki/Reservoir_sampling
 ### Usage
 
 #### Summary
-Chooses **k** random lines from **stdin**, stopping on **EOF** (**ctrl-d**) or some maximum number of lines.
+Chooses **k** random lines from **stdin**, or from a file, stopping on **EOF** (**ctrl-d**) or some maximum number of lines.
 
 #### Examples
 (Assumes the path to rsvp is not in PATH.  If it is, you can use "rsvp".)
 ```shell
 # Display 5 random lines from test100.txt
 cat test100.txt | ./rsvp -k=5
+
+# Take input from a file (pipe is ignored)
+./rsvp test100.txt
 
 # Select 5 random lines from test100.txt
 # sort them, and write them to samples.txt

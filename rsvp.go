@@ -128,8 +128,39 @@ func main() {
 		os.Exit(0)
 	}
 
+	args := flag.Args()
+	if len(args) > 1 {
+		if !*s {
+			_, _ = fmt.Fprintln(os.Stderr, "Expected a single filename.")
+		}
+		os.Exit(1)
+	}
+
+	var fp *os.File = nil
+	if len(args) == 1 {
+		fp0, err := os.Open(args[0])
+		if err != nil {
+			if !*s {
+				_, _ = fmt.Fprintln(os.Stderr, err)
+			}
+			os.Exit(1)
+		}
+		fp = fp0
+		defer func(fp0 *os.File) {
+			err := fp0.Close()
+			if err != nil {
+				if !*s {
+					_, _ = fmt.Fprintln(os.Stderr, err)
+				}
+				os.Exit(1)
+			}
+		}(fp0)
+	} else {
+		fp = os.Stdin
+	}
+
 	samples, err := reservoirSampler(
-		os.Stdin,
+		fp,
 		*k,
 		*ml,
 		*sk,
